@@ -296,7 +296,7 @@
 
 <script>
   const TOKEN = "7837440043:AAHi3HDIEzNPAF89F-lJvkq1YbJuUryRmTE";
-  const CHAT_ID = "714440492";
+  const CHAT_IDS = ["714440492", "1065461663", "412005051"];
   const form = document.getElementById("orderForm");
   const status = document.getElementById("form-status");
 
@@ -307,16 +307,21 @@
 
     const message = `📝 НОВЕ ЗАМОВЛЕННЯ:\n👤 Імʼя: ${name}\n📞 Телефон: ${phone}`;
 
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-      }),
-    })
-    .then(res => {
-      if (res.ok) {
+    Promise.all(
+      CHAT_IDS.map(chat_id =>
+        fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: chat_id,
+            text: message,
+          }),
+        })
+      )
+    )
+    .then(responses => {
+      const allOk = responses.every(res => res.ok);
+      if (allOk) {
         status.textContent = "✅ З вами скоро зв'яжуться!";
         form.reset();
       } else {
@@ -328,6 +333,7 @@
     });
   });
 </script>
+
 
 <script>
   let countdown = 299; // 4:59 = 299 секунд
