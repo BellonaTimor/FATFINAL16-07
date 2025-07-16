@@ -20,13 +20,8 @@ body {
   margin: 0;
   font-family: 'Intro', sans-serif;
   color: #212529;
-  background-color: #fff;
+background: linear-gradient(to bottom, #ffe5e5, #ffffff);
 
-  background-image: url("../img/background.jpg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
 }
 
 a {
