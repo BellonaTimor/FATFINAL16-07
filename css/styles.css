@@ -1116,8 +1116,8 @@ footer {
 
 .mega-sticker {
   position: absolute;
-  top: -10px;
-  left: -17px;
+  top: -15px;
+  left: -29px;
   width: 100px !important; /* ← !ВАЖЛИВО */
   z-index: 10;
 }
