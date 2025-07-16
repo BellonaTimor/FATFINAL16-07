@@ -1,3 +1,13 @@
+html {
+  font-size: 20px; /* базово було, ймовірно, 16px */
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 18px; /* трохи менше, але все ще велике і читабельне */
+  }
+}
+
 @font-face {
   font-family: 'Intro';
   src: url('../fonts/Intro-Black-Caps.ttf') format('truetype');
