@@ -1208,5 +1208,32 @@ footer {
   }
 }
 
+/* Вимкнути анімацію для кнопки перед футером */
+.cta-bottom .order-btn {
+  animation: none !important;
+}
+
+/* 3 банки — жовтий фон */
+.offer-card.highlight {
+  background: linear-gradient(to bottom, #fff9d1, #ffe88d);
+  border: 2px solid #ffd900;
+}
+
+/* 2 банки — преміальний світло-синій */
+.offer-card:nth-child(2) {
+  background: linear-gradient(to bottom, #e0f4ff, #c1e6ff);
+  border: 2px solid #00b7ff;
+}
+
+/* 📱 Додаткові стилі для мобільних */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center top !important;
+  }
+}
+
+
 
 
