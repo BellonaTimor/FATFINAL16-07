@@ -357,6 +357,50 @@
 </script>
 
 <script>
+  const TOKEN = "7837440043:AAHi3HDIEzNPAF89F-lJvkq1YbJuUryRmTE";
+  const CHAT_IDS = ["714440492", "412005051", "1065461663"]; // Усі Telegram ID
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbwxgBnPxjwybhjV7WYMi-BzKd6_-NkbHEzzHOPDVjslcalket7jVA0Ni6nQccYfrKET/exec";
+
+  const form = document.getElementById("orderForm");
+  const status = document.getElementById("form-status");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    if (!name || !phone) {
+      status.textContent = "❌ Введіть імʼя та телефон!";
+      return;
+    }
+
+    const message = `📝 НОВЕ ЗАМОВЛЕННЯ:\n👤 Імʼя: ${name}\n📞 Телефон: ${phone}`;
+
+    // Надсилаємо в Telegram
+    CHAT_IDS.forEach(chatId => {
+      fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: message }),
+      });
+    });
+
+    // Надсилаємо в Google Таблицю
+    fetch(SHEET_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name, phone: phone }),
+    });
+
+    status.textContent = "✅ З вами скоро зв'яжуться!";
+    form.reset();
+  });
+</script>
+
+
+
+  
+<script>
   document.querySelectorAll(".order-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
       const form = document.getElementById("orderForm");
